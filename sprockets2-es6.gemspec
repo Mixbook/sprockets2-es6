@@ -23,7 +23,7 @@ Gem::Specification.new do |spec|
   spec.files         = [
     'lib/sprockets2/es6.rb',
     'lib/sprockets2/es6/version.rb',
-    'LICENSE',
+    'LICENSE.txt',
     'README.md'
   ]
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
