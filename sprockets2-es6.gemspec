@@ -23,7 +23,7 @@ Gem::Specification.new do |spec|
   spec.files         = [
     'lib/sprockets2/es6.rb',
     'lib/sprockets2/es6/version.rb',
-    'LICENSE',
+    'LICENSE.txt',
     'README.md'
   ]
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
@@ -35,5 +35,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'sprockets', '~> 2.0'
 
   spec.add_development_dependency "bundler", "~> 1.3"
+  spec.add_development_dependency "builder"
   spec.add_development_dependency "rake"
 end
