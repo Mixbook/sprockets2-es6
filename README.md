@@ -4,17 +4,17 @@ TODO: Write a gem description
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Add this line to your application's Gemfile and authenticate with AWS Cli using your MFA token
 
-    gem 'sprockets2-es6'
+```ruby
+source 's3://mixbook-gems/sprockets2-es6', type: 'aws-s3' do
+  gem 'sprockets2-es6'
+end
+```
 
 And then execute:
 
     $ bundle
-
-Or install it yourself as:
-
-    $ gem install sprockets2-es6
 
 ## Usage
 
@@ -27,3 +27,7 @@ TODO: Write usage instructions here
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+### Release
+
+Authenticate with AWS Cli and run: `./release`

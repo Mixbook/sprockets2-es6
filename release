@@ -1,0 +1,19 @@
+#!/bin/bash
+
+PROFILE="mixbook-development-mfa"
+
+while getopts ":p:" opt; do
+  case $opt in
+    p)
+      PROFILE=${OPTARG}
+      ;;
+  esac
+done
+
+rake build
+
+
+gem generate_index -v --directory pkg
+
+echo "AWS profile: $PROFILE"
+aws s3 sync pkg/. s3://mixbook-gems/sprockets2-es6 --profile $PROFILE --region us-east-1 --exact-timestamps
