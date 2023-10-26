@@ -1,19 +1,31 @@
 #!/bin/bash
 
 PROFILE="mixbook-development-mfa"
+GEM_NAME=$(ls *.gemspec | cut -d . -f 1)
+REPOSITORY="s3://mixbook-gems/$GEM_NAME"
 
-while getopts ":p:" opt; do
+echo ">> Repository: $REPOSITORY"
+
+while getopts ":p:g:" opt; do
   case $opt in
     p)
       PROFILE=${OPTARG}
       ;;
+    g)
+      GEM_NAME=${OPTARG}
+      ;;
   esac
 done
 
-rake build
+echo $GEM_NAME
 
+echo ">> Download Remote"
+aws s3 sync $REPOSITORY pkg/. --profile $PROFILE --region us-east-1
+
+echo ">> Build Gem"
+rake build
 
 gem generate_index -v --directory pkg
 
-echo "AWS profile: $PROFILE"
-aws s3 sync pkg/. s3://mixbook-gems/sprockets2-es6 --profile $PROFILE --region us-east-1 --exact-timestamps
+echo ">> Release"
+aws s3 sync pkg/. $REPOSITORY --profile $PROFILE --region us-east-1
